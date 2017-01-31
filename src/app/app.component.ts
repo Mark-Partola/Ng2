@@ -1,4 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+
+interface IComponent {}
+
+@Component({
+  selector: 'block-component',
+  template: '{{config.name}}'
+})
+export class BlockComponent implements IComponent {
+  @Input() config;
+}
 
 @Component({
   selector: 'app-root',
@@ -6,5 +16,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  private components: Array<Object> = [];
+
+  constructor() {
+    this.components.push(
+      {
+          name: "Button"
+      },
+      {
+          name: ""
+      }
+    );
+  }
 }
