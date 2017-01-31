@@ -1,0 +1,17 @@
+.sandbox {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  &__panel {
+    flex: 0 0 200px;
+    background-color: #fff;
+    box-shadow: 0 0 9px 1px rgba(0, 0, 0, .3);
+    z-index: 1;
+  }
+
+  &__work-area {
+    flex-grow: 1;
+    background-image: url(http://uconstructor.com/_ld/0/65729707.jpg);
+  }
+}

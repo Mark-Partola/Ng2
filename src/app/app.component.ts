@@ -1,19 +1,20 @@
 import {Component, Input} from '@angular/core';
 
-interface IComponent {}
-
 @Component({
   selector: 'block-component',
-  template: '{{config.name}}'
+  template: `
+    <button *ngIf="config.type == 'button'">{{config.text}}</button>
+    <div *ngIf="config.type == 'div'">{{config.text}}</div>
+  `
 })
-export class BlockComponent implements IComponent {
-  @Input() config;
+export class BlockComponent {
+  @Input() config: {type: string};
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   private components: Array<Object> = [];
@@ -21,10 +22,14 @@ export class AppComponent {
   constructor() {
     this.components.push(
       {
-          name: "Button"
+          type: 'button',
+          text: 'Кнопка',
+          width: 100,
+          height: 50
       },
       {
-          name: ""
+          type: 'div',
+          text: 'Блок'
       }
     );
   }
