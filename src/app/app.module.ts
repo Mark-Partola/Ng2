@@ -3,12 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent, BlockComponent } from './app.component';
+import { AppComponent } from './app.component';
+import { BlockButton } from './block-components/button/button.component';
+import { ContainerComponent } from './container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlockComponent
+    BlockButton,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -16,6 +19,7 @@ import { AppComponent, BlockComponent } from './app.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BlockButton]
 })
 export class AppModule { }

@@ -1,10 +1,10 @@
 <div class="sandbox">
   <div class="sandbox__panel">
-    <div *ngFor="let component of components">
-      <block-component [config]="component"></block-component>
-    </div>
+    <app-container [config]="config"></app-container>
   </div>
   <div class="sandbox__work-area">
-
+    <input type="text" [(ngModel)]="config.text">
+    <input type="text" [(ngModel)]="config.width">
+    <input type="text" [(ngModel)]="config.height">
   </div>
 </div>
