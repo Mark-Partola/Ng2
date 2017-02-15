@@ -11,12 +11,19 @@ export class AppComponent implements AfterViewInit {
   constructor(private containerService: ContainerService) {}
 
   public ngAfterViewInit() {
-    setTimeout(() => {
-      this.containerService.getConfig().next({
+    this.containerService.getConfig().next([
+      {
+        type: 'panel',
+        width: 0,
+        height: 0,
+        title: 'Панель'
+      },
+      {
+        type: 'button',
         width: 0,
         height: 0,
         title: 'Кнопка'
-      });
-    }, 2000);
+      }
+    ]);
   }
 }

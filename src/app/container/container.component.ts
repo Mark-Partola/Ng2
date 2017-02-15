@@ -3,7 +3,12 @@ import {
 } from '@angular/core';
 
 import { BlockButton } from '../block-components/button/button.component';
+import { BlockPanel } from '../block-components/panel/panel.component';
 import {ContainerService} from './container.service';
+type BaseBlock = {
+  config: any,
+  onEvent: any
+}
 
 @Component({
   selector: 'app-container',
@@ -12,7 +17,7 @@ import {ContainerService} from './container.service';
 })
 export class ContainerComponent implements AfterViewInit {
 
-  private component: ComponentRef<BlockButton>;
+  private component: ComponentRef<any>;
 
   @ViewChild('container', { read: ViewContainerRef })
   public componentsContainer: ViewContainerRef;
@@ -24,16 +29,33 @@ export class ContainerComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-    let componentFactory = this.resolver.resolveComponentFactory(BlockButton);
-    this.component = this.componentsContainer.createComponent(componentFactory);
 
-    this.component.instance.onEvent.subscribe((eventData) => {
-      console.log(eventData);
-    });
+    const componentMap = {
+      button: BlockButton,
+      panel: BlockPanel
+    };
 
-    this.containerService.getConfig().subscribe((data) => {
+    this.containerService.getConfig().subscribe(data => {
       console.log(data);
-      this.component.instance.config = data;
+
+      if (Object.is(data, null)) {
+        return;
+      } else if (!Array.isArray(data)) {
+        throw new TypeError('[ComponentContainer]: Config must be an Array');
+      }
+
+      data.forEach(config => {
+        console.log(config);
+      });
+      
+      const componentFactory = this.resolver.resolveComponentFactory(componentMap[data[0].type]);
+      let component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
+
+      component.instance.onEvent.subscribe((eventData) => {
+        console.log(eventData);
+      });
+      
+      component.instance.config = data[0];
       this.cdRef.detectChanges();
     });
   }
