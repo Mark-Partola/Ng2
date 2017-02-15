@@ -2,6 +2,8 @@ import {
   Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Input, ChangeDetectorRef, SimpleChanges, ComponentRef
 } from '@angular/core';
 
+import {Subject} from 'rxjs/Subject';
+
 import { BlockButton } from '../block-components/button/button.component';
 import { BlockPanel } from '../block-components/panel/panel.component';
 import {ContainerService} from './container.service';
@@ -19,6 +21,11 @@ export class ContainerComponent implements AfterViewInit {
 
   private component: ComponentRef<any>;
 
+  private componentMap = {
+    button: BlockButton,
+    panel: BlockPanel
+  };
+
   @ViewChild('container', { read: ViewContainerRef })
   public componentsContainer: ViewContainerRef;
 
@@ -29,41 +36,29 @@ export class ContainerComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-
-    const componentMap = {
-      button: BlockButton,
-      panel: BlockPanel
-    };
-
-    this.containerService.getUpdateStream().subscribe(updateStreamData => {
-      console.log(updateStreamData.id, updateStreamData.stream$);
+    this.containerService.getUpdateStream().subscribe((updateStreamData: {id: string, stream$: Subject<any>})=> {
+      console.log(updateStreamData);
+      this.createComponent(updateStreamData.stream$);
     });
+  }
 
-    /*.subscribe(data => {
+  private createComponent(config$) {
 
-      console.log(data);
-
-      if (data || !data) return;
-
-      if (Object.is(data, null)) {
+    console.log(config$);
+    config$.subscribe(data => {
+      if (!data) {
         return;
-      } else if (!Array.isArray(data)) {
-        throw new TypeError('[ComponentContainer]: Config must be an Array');
       }
 
-      data.forEach(config => {
-        console.log(config);
+      const componentFactory = this.resolver.resolveComponentFactory(this.componentMap[data.type]);
+      let component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
 
-        const componentFactory = this.resolver.resolveComponentFactory(componentMap[config.type]);
-        let component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
+      component.instance.onEvent.subscribe(eventData => console.log(eventData));
 
-        component.instance.onEvent.subscribe(eventData => console.log(eventData));
-        
-        component.instance.config = config;
-        this.cdRef.detectChanges();
+      component.instance.config = data;
+      this.cdRef.detectChanges();
 
-      });
-    });*/
+    });
   }
 
 }
