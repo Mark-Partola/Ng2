@@ -1,15 +1,22 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
+import {ContainerService} from './container/container.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
-  public config = {
-    width: 0,
-    height: 0,
-    title: ''
-  };
+  constructor(private containerService: ContainerService) {}
+
+  public ngAfterViewInit() {
+    setTimeout(() => {
+      this.containerService.getConfig().next({
+        width: 0,
+        height: 0,
+        title: 'Кнопка'
+      });
+    }, 2000);
+  }
 }

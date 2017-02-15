@@ -1,8 +1,9 @@
 import {
-  Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Input
+  Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Input, ChangeDetectorRef, SimpleChanges, ComponentRef
 } from '@angular/core';
 
 import { BlockButton } from '../block-components/button/button.component';
+import {ContainerService} from './container.service';
 
 @Component({
   selector: 'app-container',
@@ -11,25 +12,30 @@ import { BlockButton } from '../block-components/button/button.component';
 })
 export class ContainerComponent implements AfterViewInit {
 
-  @Input()
-  public config;
+  private component: ComponentRef<BlockButton>;
 
   @ViewChild('container', { read: ViewContainerRef })
   public componentsContainer: ViewContainerRef;
 
-  constructor(private resolver: ComponentFactoryResolver) {}
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private cdRef: ChangeDetectorRef,
+    private containerService: ContainerService
+  ) {}
 
   public ngAfterViewInit(): void {
     let componentFactory = this.resolver.resolveComponentFactory(BlockButton);
-    let component = this.componentsContainer.createComponent(componentFactory);
+    this.component = this.componentsContainer.createComponent(componentFactory);
 
-    component.instance.onEvent.subscribe((eventData) => {
-      console.log('!', eventData);
+    this.component.instance.onEvent.subscribe((eventData) => {
+      console.log(eventData);
     });
 
-    component.instance.config = {
-      title: 'Кнопка'
-    };
+    this.containerService.getConfig().subscribe((data) => {
+      console.log(data);
+      this.component.instance.config = data;
+      this.cdRef.detectChanges();
+    });
   }
 
 }

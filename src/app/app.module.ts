@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { BlockButton } from './block-components/button/button.component';
 import { ContainerComponent } from './container/container.component';
+import { ContainerService } from './container/container.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ContainerComponent } from './container/container.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ContainerService],
   bootstrap: [AppComponent],
   entryComponents: [BlockButton]
 })
