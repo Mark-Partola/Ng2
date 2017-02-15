@@ -14,14 +14,18 @@ export class AppComponent implements AfterViewInit {
     this.containerService.getConfig().next([
       {
         type: 'panel',
-        width: 0,
-        height: 0,
+        styles: {
+          width: '100px',
+          height: '50px'
+        },
         title: 'Панель'
       },
       {
         type: 'button',
-        width: 0,
-        height: 0,
+        styles: {
+          width: '200px',
+          height: '100px'
+        },
         title: 'Кнопка'
       }
     ]);

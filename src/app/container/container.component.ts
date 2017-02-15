@@ -36,7 +36,6 @@ export class ContainerComponent implements AfterViewInit {
     };
 
     this.containerService.getConfig().subscribe(data => {
-      console.log(data);
 
       if (Object.is(data, null)) {
         return;
@@ -46,17 +45,16 @@ export class ContainerComponent implements AfterViewInit {
 
       data.forEach(config => {
         console.log(config);
-      });
-      
-      const componentFactory = this.resolver.resolveComponentFactory(componentMap[data[0].type]);
-      let component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
 
-      component.instance.onEvent.subscribe((eventData) => {
-        console.log(eventData);
+        const componentFactory = this.resolver.resolveComponentFactory(componentMap[config.type]);
+        let component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
+
+        component.instance.onEvent.subscribe(eventData => console.log(eventData));
+        
+        component.instance.config = config;
+        this.cdRef.detectChanges();
+
       });
-      
-      component.instance.config = data[0];
-      this.cdRef.detectChanges();
     });
   }
 
