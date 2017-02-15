@@ -40,6 +40,9 @@ export class ContainerComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * TODO: Сделать проверку созданности по айди.
+   */
   private createComponent(config$) {
 
     let created = false;
