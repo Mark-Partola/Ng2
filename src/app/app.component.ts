@@ -30,5 +30,16 @@ export class AppComponent implements AfterViewInit {
         title: 'Кнопка'
       });
     }, 5000);
+
+    setTimeout(() => {
+      this.containerService.for('button').next({
+        type: 'button',
+        styles: {
+          width: '200px',
+          height: '100px'
+        },
+        title: 'Новое название'
+      });
+    }, 5000);
   }
 }

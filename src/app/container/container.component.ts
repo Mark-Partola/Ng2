@@ -2,8 +2,6 @@ import {
   Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Input, ChangeDetectorRef, SimpleChanges, ComponentRef
 } from '@angular/core';
 
-import {Subject} from 'rxjs/Subject';
-
 import { BlockButton } from '../block-components/button/button.component';
 import { BlockPanel } from '../block-components/panel/panel.component';
 import {ContainerService} from './container.service';
@@ -36,7 +34,7 @@ export class ContainerComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-    this.containerService.getUpdateStream().subscribe((updateStreamData: {id: string, stream$: Subject<any>})=> {
+    this.containerService.getUpdateStream().subscribe((updateStreamData: ConfigStream) => {
       console.log(updateStreamData);
       this.createComponent(updateStreamData.stream$);
     });
@@ -44,16 +42,24 @@ export class ContainerComponent implements AfterViewInit {
 
   private createComponent(config$) {
 
-    console.log(config$);
+    let created = false;
+    let component;
+
+    const createIfNotExist = type => {
+      if (!created) {
+        const componentFactory = this.resolver.resolveComponentFactory(this.componentMap[type]);
+        component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
+        component.instance.onEvent.subscribe(eventData => console.log(eventData));
+        created = true;
+      }
+    }
+
     config$.subscribe(data => {
       if (!data) {
         return;
       }
 
-      const componentFactory = this.resolver.resolveComponentFactory(this.componentMap[data.type]);
-      let component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
-
-      component.instance.onEvent.subscribe(eventData => console.log(eventData));
+      createIfNotExist(data.type);
 
       component.instance.config = data;
       this.cdRef.detectChanges();

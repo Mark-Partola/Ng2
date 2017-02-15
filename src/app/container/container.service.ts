@@ -7,7 +7,7 @@ import {merge} from 'rxjs/operator/merge';
 export class ContainerService {
 
   private streams = {};
-  private update$ = new Subject<{id: string, stream$: Subject<any>}>();
+  private update$ = new Subject<ConfigStream>();
 
   public for(id) {
     if (!this.streams[id]) {
