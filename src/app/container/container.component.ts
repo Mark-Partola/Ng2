@@ -35,7 +35,15 @@ export class ContainerComponent implements AfterViewInit {
       panel: BlockPanel
     };
 
-    this.containerService.getConfig().subscribe(data => {
+    this.containerService.getUpdateStream().subscribe(updateStreamData => {
+      console.log(updateStreamData.id, updateStreamData.stream$);
+    });
+
+    /*.subscribe(data => {
+
+      console.log(data);
+
+      if (data || !data) return;
 
       if (Object.is(data, null)) {
         return;
@@ -55,7 +63,7 @@ export class ContainerComponent implements AfterViewInit {
         this.cdRef.detectChanges();
 
       });
-    });
+    });*/
   }
 
 }
