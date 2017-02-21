@@ -8,7 +8,7 @@ import {ContainerService} from './container/container.service';
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(private containerService: ContainerService) {}
+  constructor(private configService: ContainerService) {}
 
   public blocks = [
     {
@@ -21,10 +21,10 @@ export class AppComponent implements AfterViewInit {
     }
   ];
 
-  public propsEditor$;
+  public target;
 
   public ngAfterViewInit() {
-    this.containerService.for('button').next({
+    this.configService.for('button').next({
       type: 'button',
       styles: {
         width: '200px',
@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit {
     });
 
     setTimeout(() => {
-      this.containerService.for('panel').next({
+      this.configService.for('panel').next({
         type: 'button',
         styles: {
           width: '200px',
@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit {
     }, 5000);
 
     setTimeout(() => {
-      this.containerService.for('button').next({
+      this.configService.for('button').next({
         type: 'button',
         styles: {
           width: '200px',
@@ -57,7 +57,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   public onComponentChoose (type) {
-    this.containerService.for(Date.now()).next({
+    this.configService.for(Date.now()).next({
       type: type,
       styles: {
         width: '50px',
@@ -67,7 +67,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  public onControlPoint (event) {
-    this.propsEditor$ = this.containerService.for(event);
+  public onControlPoint (target) {
+    this.target = target;
   }
 }
