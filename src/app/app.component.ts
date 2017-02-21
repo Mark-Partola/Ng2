@@ -18,6 +18,14 @@ export class AppComponent implements AfterViewInit {
     {
       component: 'panel',
       title: 'Панель'
+    },
+    {
+      component: 'button',
+      title: 'Кнопка'
+    },
+    {
+      component: 'panel',
+      title: 'Панель'
     }
   ];
 

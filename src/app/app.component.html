@@ -1,6 +1,28 @@
 <div class="sandbox">
     <div class="sandbox__panel">
-        <control-panel-block [blocks]="blocks" (onComponentChoose)="onComponentChoose($event)"></control-panel-block>
+      <div class="panel-block">
+        <header class="panel-block__header">
+          Components
+        </header>
+        <control-panel-block [blocks]="blocks"
+                             (onComponentChoose)="onComponentChoose($event)">
+        </control-panel-block>
+      </div>
+      <div class="panel-block">
+        <div class="panel-properties">
+          <header class="panel-block__header">
+            Свойства "Кнопка"
+          </header>
+          <div class="panel-properties__row">
+            <div class="panel-properties__cell">Свойство</div>
+            <div class="panel-properties__cell">Значение</div>
+          </div>
+          <div class="panel-properties__row">
+            <div class="panel-properties__cell">Высота</div>
+            <div class="panel-properties__cell">100</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="sandbox__work-area">
       <app-container></app-container>

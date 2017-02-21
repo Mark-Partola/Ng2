@@ -5,7 +5,8 @@
 
   &__panel {
     flex: 0 0 150px;
-    background-color: #fff;
+    max-width: 150px;
+    background-color: #555;
     box-shadow: 0 0 9px 1px rgba(0, 0, 0, .3);
     z-index: 1;
   }
@@ -13,5 +14,64 @@
   &__work-area {
     flex-grow: 1;
     background-image: url(http://uconstructor.com/_ld/0/65729707.jpg);
+  }
+}
+
+.panel-block {
+  min-height: 200px;
+  color: #ddd;
+
+  &:not(:first-child) {
+    border-top: 1px solid #666;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #4a4a4a;
+    font-family: "RobotoLight", sans-serif;
+    font-size: 11px;
+    color: #ccc;
+  }
+}
+
+.panel-properties {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "RobotoLight", sans-serif;
+  font-size: 11px;
+
+  &__header-cell{
+    flex: 0 0 50%;
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
+    height: 30px;
+    align-items: center;
+  }
+
+  &__cell {
+    flex: 0 0 50%;
+
+    &:first-child {
+      padding-left: 10px;
+    }
+
+    &:last-child {
+      padding-right: 10px;
+    }
+
   }
 }
