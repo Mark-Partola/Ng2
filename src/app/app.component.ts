@@ -53,4 +53,15 @@ export class AppComponent implements AfterViewInit {
       });
     }, 5000);
   }
+
+  public onComponentChoose (type) {
+    this.containerService.for(Date.now()).next({
+      type: type,
+      styles: {
+        width: '50px',
+        height: '20px'
+      },
+      title: 'Кнопка'
+    });
+  }
 }

@@ -1,5 +1,8 @@
 <div class="app-blocks">
-  <div class="app-blocks__item" *ngFor="let block of blocks" [title]="block.title">
+  <div *ngFor="let block of blocks"
+       (click)="onClick(block.component)"
+       [title]="block.title"
+       class="app-blocks__item">
     <img src="/assets/control-panel-block/{{ block.component }}.svg">
   </div>
 </div>

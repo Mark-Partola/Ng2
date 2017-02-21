@@ -1,6 +1,6 @@
 <div class="sandbox">
     <div class="sandbox__panel">
-        <control-panel-block [blocks]="blocks"></control-panel-block>
+        <control-panel-block [blocks]="blocks" (onComponentChoose)="onComponentChoose($event)"></control-panel-block>
     </div>
     <div class="sandbox__work-area">
       <app-container></app-container>
