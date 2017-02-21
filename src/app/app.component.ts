@@ -10,6 +10,17 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private containerService: ContainerService) {}
 
+  public blocks = [
+    {
+      component: 'button',
+      title: 'Кнопка'
+    },
+    {
+      component: 'panel',
+      title: 'Панель'
+    }
+  ];
+
   public ngAfterViewInit() {
     this.containerService.for('button').next({
       type: 'button',

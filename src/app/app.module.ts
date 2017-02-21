@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { BlockButton } from './block-components/button/button.component';
 import { BlockPanel } from './block-components/panel/panel.component';
+import { ControlPanelBlock } from './control-panel-block/control-panel-block.component';
 
 import { ContainerComponent } from './container/container.component';
 import { ContainerService } from './container/container.service';
@@ -15,7 +16,8 @@ import { ContainerService } from './container/container.service';
     AppComponent,
     BlockButton,
     BlockPanel,
-    ContainerComponent
+    ContainerComponent,
+    ControlPanelBlock
   ],
   imports: [
     BrowserModule,

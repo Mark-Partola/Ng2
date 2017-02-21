@@ -55,7 +55,7 @@ export class ContainerComponent implements AfterViewInit {
         component.instance.onEvent.subscribe(eventData => console.log(eventData));
         created = true;
       }
-    }
+    };
 
     config$.subscribe(data => {
       if (!data) {

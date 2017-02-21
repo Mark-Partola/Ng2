@@ -1,0 +1,5 @@
+<div class="app-blocks">
+  <div class="app-blocks__item" *ngFor="let block of blocks" [title]="block.title">
+    <img src="/assets/control-panel-block/{{ block.component }}.svg">
+  </div>
+</div>
