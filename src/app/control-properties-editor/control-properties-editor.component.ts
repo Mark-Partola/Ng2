@@ -8,9 +8,12 @@ import {Component, Input} from '@angular/core';
 export class ControlPropertiesEditor {
 
   @Input()
-  public target;
+  public set target (config) {
+    if (typeof config === 'object') {
+      this.properties = Object.entries(config.properties);
+    }
 
-  ngAfterViewInit () {
-    console.log(this.target);
-  }
+  };
+
+  public properties = [];
 }
