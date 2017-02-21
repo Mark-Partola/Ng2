@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
-import {merge} from 'rxjs/operator/merge';
 
 @Injectable()
 export class ContainerService {
@@ -23,10 +21,5 @@ export class ContainerService {
 
   public getUpdateStream() {
     return this.update$;
-  }
-
-  public getConfigs() {
-    return this.streams;
-  }
-
+  }d
 }

@@ -8,8 +8,15 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 export class BlockPanel {
 
   @Input()
+  public id;
+
+  @Input()
   public config;
 
   @Output()
   public onEvent = new EventEmitter();
+
+  public onClick() {
+    this.onEvent.next(this.id);
+  }
 }

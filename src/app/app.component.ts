@@ -18,14 +18,6 @@ export class AppComponent implements AfterViewInit {
     {
       component: 'panel',
       title: 'Панель'
-    },
-    {
-      component: 'button',
-      title: 'Кнопка'
-    },
-    {
-      component: 'panel',
-      title: 'Панель'
     }
   ];
 
@@ -71,5 +63,9 @@ export class AppComponent implements AfterViewInit {
       },
       title: 'Кнопка'
     });
+  }
+
+  public onControlPoint (event) {
+    console.log(event);
   }
 }

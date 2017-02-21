@@ -1,11 +1,13 @@
 import {
-  Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Input, ChangeDetectorRef, SimpleChanges, ComponentRef
+  Component, ViewContainerRef, EventEmitter, ViewChild, ComponentFactoryResolver, AfterViewInit, Output, ChangeDetectorRef, ComponentRef
 } from '@angular/core';
 
 import { BlockButton } from '../block-components/button/button.component';
 import { BlockPanel } from '../block-components/panel/panel.component';
 import {ContainerService} from './container.service';
+
 type BaseBlock = {
+  id: string | number,
   config: any,
   onEvent: any
 }
@@ -16,6 +18,9 @@ type BaseBlock = {
   styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent implements AfterViewInit {
+
+  @Output()
+  public controlPoint = new EventEmitter<any>();
 
   private component: ComponentRef<any>;
 
@@ -36,33 +41,34 @@ export class ContainerComponent implements AfterViewInit {
   public ngAfterViewInit(): void {
     this.containerService.getUpdateStream().subscribe((updateStreamData: ConfigStream) => {
       console.log(updateStreamData);
-      this.createComponent(updateStreamData.stream$);
+      this.createComponent(updateStreamData);
     });
   }
 
   /**
    * TODO: Сделать проверку созданности по айди.
    */
-  private createComponent(config$) {
+  private createComponent(config) {
 
     let created = false;
     let component;
 
-    const createIfNotExist = type => {
+    const createIfNotExist = (type, id) => {
       if (!created) {
         const componentFactory = this.resolver.resolveComponentFactory(this.componentMap[type]);
         component = this.componentsContainer.createComponent(componentFactory) as ComponentRef<BaseBlock>;
-        component.instance.onEvent.subscribe(eventData => console.log(eventData));
+        component.instance.id = id;
+        component.instance.onEvent.subscribe(eventData => this.controlPoint.next(eventData));
         created = true;
       }
     };
 
-    config$.subscribe(data => {
+    config.stream$.subscribe(data => {
       if (!data) {
         return;
       }
 
-      createIfNotExist(data.type);
+      createIfNotExist(data.type, config.id);
 
       component.instance.config = data;
       this.cdRef.detectChanges();

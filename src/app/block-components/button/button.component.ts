@@ -8,12 +8,15 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 export class BlockButton {
 
   @Input()
+  public id;
+
+  @Input()
   public config;
 
   @Output()
   public onEvent = new EventEmitter();
 
-  public onClick(event) {
-    this.onEvent.next(event);
+  public onClick() {
+    this.onEvent.next(this.id);
   }
 }
