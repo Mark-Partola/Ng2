@@ -11,8 +11,6 @@ export class ControlPropertiesEditor {
   public target;
 
   ngAfterViewInit () {
-    setInterval(() => {
-      console.log(this.target);
-    }, 1000);
+    console.log(this.target);
   }
 }

@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit {
     }
   ];
 
-  public target;
+  public targetConfig;
 
   public ngAfterViewInit() {
     this.configService.for('button').next({
@@ -67,7 +67,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  public onControlPoint (target) {
-    this.target = target;
+  public onControlPoint (config) {
+    this.targetConfig = config;
   }
 }
