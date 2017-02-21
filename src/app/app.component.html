@@ -9,19 +9,7 @@
         </control-panel-block>
       </div>
       <div class="panel-block">
-        <div class="panel-properties">
-          <header class="panel-block__header">
-            Свойства "Кнопка"
-          </header>
-          <div class="panel-properties__row">
-            <div class="panel-properties__cell">Свойство</div>
-            <div class="panel-properties__cell">Значение</div>
-          </div>
-          <div class="panel-properties__row">
-            <div class="panel-properties__cell">Высота</div>
-            <div class="panel-properties__cell">100</div>
-          </div>
-        </div>
+        <control-properties-editor [target]="propsEditor$"></control-properties-editor>
       </div>
     </div>
     <div class="sandbox__work-area">

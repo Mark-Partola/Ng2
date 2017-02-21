@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BlockButton } from './block-components/button/button.component';
 import { BlockPanel } from './block-components/panel/panel.component';
 import { ControlPanelBlock } from './control-panel-block/control-panel-block.component';
+import { ControlPropertiesEditor } from './control-properties-editor/control-properties-editor.component';
 
 import { ContainerComponent } from './container/container.component';
 import { ContainerService } from './container/container.service';
@@ -17,7 +18,8 @@ import { ContainerService } from './container/container.service';
     BlockButton,
     BlockPanel,
     ContainerComponent,
-    ControlPanelBlock
+    ControlPanelBlock,
+    ControlPropertiesEditor
   ],
   imports: [
     BrowserModule,

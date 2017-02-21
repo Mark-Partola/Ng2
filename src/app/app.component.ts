@@ -21,6 +21,8 @@ export class AppComponent implements AfterViewInit {
     }
   ];
 
+  public propsEditor$;
+
   public ngAfterViewInit() {
     this.containerService.for('button').next({
       type: 'button',
@@ -66,6 +68,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   public onControlPoint (event) {
-    console.log(event);
+    this.propsEditor$ = this.containerService.for(event);
   }
 }
