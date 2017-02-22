@@ -8,7 +8,11 @@ import {ContainerService} from "../container/container.service";
 })
 export class ControlPropertiesEditor {
 
-  constructor (private configService: ContainerService) {}
+  private configStream$;
+
+  constructor (private configService: ContainerService) {
+
+  }
 
   @Input()
   public set target (config) {
@@ -35,7 +39,8 @@ export class ControlPropertiesEditor {
   }
 
   private updateByConfigChanging (configId) {
-    this.configService.for(configId).getStream().subscribe(newConfig => {
+    this.configStream$ && this.configStream$.unsubscribe();
+    this.configStream$ = this.configService.for(configId).getStream().subscribe(newConfig => {
       this.setProps(newConfig);
     });
   }
