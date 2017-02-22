@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit {
   public targetConfig;
 
   public ngAfterViewInit() {
-    this.configService.for('button').next({
+    this.configService.for('button').update({
       type: 'button',
       styles: {
         width: '200px',
@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit {
     });
 
     setTimeout(() => {
-      this.configService.for('panel').next({
+      this.configService.for('panel').update({
         type: 'button',
         styles: {
           width: '200px',
@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit {
     }, 5000);
 
     setTimeout(() => {
-      this.configService.for('button').next({
+      this.configService.for('button').update({
         type: 'button',
         styles: {
           width: '200px',
@@ -61,7 +61,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   public onComponentChoose (type) {
-    this.configService.for(Date.now()).next({
+    this.configService.for(Date.now()).update({
       type: type,
       styles: {
         width: '50px',

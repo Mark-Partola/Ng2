@@ -17,7 +17,9 @@ export class BlockPanel {
   @Output()
   public onEvent = new EventEmitter();
 
-  public onClick() {
+  public onClick(event) {
+    event.preventDefault();
+
     this.onEvent.next({
       id: this.id,
       properties: Object.assign({}, config, this.config)

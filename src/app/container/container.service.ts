@@ -5,21 +5,38 @@ import {Subject} from 'rxjs/Subject';
 export class ContainerService {
 
   private streams = {};
-  private update$ = new Subject<ConfigStream>();
+  private full$ = new Subject<ConfigStream>();
 
   public for(id) {
     if (!this.streams[id]) {
-      this.streams[id] = new Subject();
-      this.update$.next({
+      this.streams[id] = new StreamSubject();
+      this.full$.next({
         id: id,
-        stream$: this.streams[id]
+        stream$: this.streams[id].getStream()
       });
     }
 
     return this.streams[id];
   }
 
-  public getUpdateStream() {
-    return this.update$;
-  }d
+  public getStream() {
+    return this.full$;
+  }
+}
+
+class StreamSubject {
+
+  private subject$ = new Subject();
+
+  public patch (piece) {
+    debugger;
+  }
+
+  public update (config) {
+    this.subject$.next(config);
+  }
+
+  public getStream () {
+    return this.subject$;
+  }
 }

@@ -31,13 +31,11 @@ export class ControlPropertiesEditor {
     /**
      * TODO: Подумать над отправкой патча конфига, а не всего сразу при каждом изменении.
      */
-    this.configService.for(this.id).next(
-      Object.assign({}, this.properties, {[prop]: value})
-    );
+    this.configService.for(this.id).patch({[prop]: value});
   }
 
   private updateByConfigChanging (configId) {
-    this.configService.for(configId).subscribe(newConfig => {
+    this.configService.for(configId).getStream().subscribe(newConfig => {
       this.setProps(newConfig);
     });
   }

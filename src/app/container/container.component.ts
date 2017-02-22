@@ -43,7 +43,7 @@ export class ContainerComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-    this.containerService.getUpdateStream()
+    this.containerService.getStream()
       .subscribe((updateStreamData: ConfigStream) => {
         console.log(updateStreamData);
         this.createComponent(updateStreamData);
