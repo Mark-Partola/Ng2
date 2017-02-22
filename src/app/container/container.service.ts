@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class ContainerService {
@@ -26,10 +27,12 @@ export class ContainerService {
 
 class StreamSubject {
 
-  private subject$ = new Subject();
+  private subject$ = new BehaviorSubject(null);
 
   public patch (piece) {
-    debugger;
+    const value = this.subject$.value;
+    Object.keys(piece).forEach(key => value[key] = piece[key]);
+    this.update(value);
   }
 
   public update (config) {

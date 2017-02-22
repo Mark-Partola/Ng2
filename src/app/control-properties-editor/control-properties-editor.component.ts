@@ -11,7 +11,9 @@ export class ControlPropertiesEditor {
   private configStream$;
 
   constructor (private configService: ContainerService) {
-
+    /**
+     * TODO: Проверить возможность утечек при деструкции компонента.
+     */
   }
 
   @Input()
@@ -31,9 +33,6 @@ export class ControlPropertiesEditor {
 
     /**
      * TODO: Изменять только значения. На текущий момент перезаписывается весь конфиг. Из-то чего теряется фокус.
-     */
-    /**
-     * TODO: Подумать над отправкой патча конфига, а не всего сразу при каждом изменении.
      */
     this.configService.for(this.id).patch({[prop]: value});
   }

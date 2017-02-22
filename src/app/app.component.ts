@@ -26,11 +26,7 @@ export class AppComponent implements AfterViewInit {
   public ngAfterViewInit() {
     this.configService.for('button').update({
       type: 'button',
-      styles: {
-        width: '200px',
-        height: '100px'
-      },
-      title: 'Кнопка'
+      title: 'Кнопка1'
     });
 
     setTimeout(() => {
@@ -40,7 +36,8 @@ export class AppComponent implements AfterViewInit {
           width: '200px',
           height: '100px'
         },
-        title: 'Кнопка'
+        title: 'Кнопка1',
+        top: 2
       });
     }, 5000);
 
