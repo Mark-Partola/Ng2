@@ -12,7 +12,6 @@ export class ControlPropertiesEditor {
     if (typeof config === 'object') {
       this.properties = Object.entries(config.properties);
     }
-
   };
 
   public properties = [];

@@ -15,6 +15,7 @@
     display: flex;
     height: 30px;
     align-items: center;
+    justify-content: space-between;
   }
 
   &__cell {
@@ -25,7 +26,19 @@
     }
 
     &:last-child {
-      padding-right: 10px;
+      width: 100%;
+      background-color: transparent;
+      color: #ccc;
+      border: 1px solid #777;
+      padding: 1px 3px;
+      outline: none;
+      flex: 1 0 30%;
+      margin-right: 10px;
+      transition: border-color .3s;
+
+      &:focus {
+        border-color: #999;
+      }
     }
 
   }
