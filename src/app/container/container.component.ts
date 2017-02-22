@@ -1,5 +1,7 @@
 import {
-  Component, ViewContainerRef, EventEmitter, ViewChild, ComponentFactoryResolver, AfterViewInit, Output, ChangeDetectorRef, ComponentRef
+  Component, ViewContainerRef, EventEmitter, ViewChild,
+  ComponentFactoryResolver, AfterViewInit, Output,
+  ChangeDetectorRef, ComponentRef
 } from '@angular/core';
 
 import { BlockButton } from '../block-components/button/button.component';
@@ -29,7 +31,9 @@ export class ContainerComponent implements AfterViewInit {
     panel: BlockPanel
   };
 
-  @ViewChild('container', { read: ViewContainerRef })
+  @ViewChild('container', {
+    read: ViewContainerRef
+  })
   public componentsContainer: ViewContainerRef;
 
   constructor(
@@ -39,10 +43,11 @@ export class ContainerComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-    this.containerService.getUpdateStream().subscribe((updateStreamData: ConfigStream) => {
-      console.log(updateStreamData);
-      this.createComponent(updateStreamData);
-    });
+    this.containerService.getUpdateStream()
+      .subscribe((updateStreamData: ConfigStream) => {
+        console.log(updateStreamData);
+        this.createComponent(updateStreamData);
+      });
   }
 
   /**

@@ -15,6 +15,8 @@ export class ControlPropertiesEditor {
     if (typeof config === 'object') {
       this.id = config.id;
       this.properties = config.properties;
+
+      this.updateByConfigChanging(this.id);
     }
   };
 
@@ -24,5 +26,11 @@ export class ControlPropertiesEditor {
   public onPropertyChange (prop, value) {
     this.properties[prop] = value;
     this.configService.for(this.id).next(this.properties);
+  }
+
+  private updateByConfigChanging (configId) {
+    this.configService.for(configId).subscribe(newConfig => {
+      this.properties = newConfig.properties;
+    });
   }
 }
