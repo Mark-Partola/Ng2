@@ -1,6 +1,6 @@
 <div class="panel-properties">
   <div class="panel-properties__row" *ngFor="let prop of properties">
-    <div class="panel-properties__cell">{{ prop[0] }}:</div>
-    <input class="panel-properties__cell" value="{{ prop[1] }}">
+    <label attr.for="{{ prop[0] }}" class="panel-properties__cell">{{ prop[0] }}:</label>
+    <input id="{{ prop[0] }}" class="panel-properties__cell" value="{{ prop[1] }}">
   </div>
 </div>
