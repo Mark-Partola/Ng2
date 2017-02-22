@@ -24,8 +24,16 @@ export class ControlPropertiesEditor {
   public properties = {};
 
   public onPropertyChange (prop, value) {
-    this.properties[prop] = value;
-    this.configService.for(this.id).next(this.properties);
+
+    /**
+     * TODO: Изменять только значения. На текущий момент перезаписывается весь конфиг. Из-то чего теряется фокус.
+     */
+    /**
+     * TODO: Подумать над отправкой патча конфига, а не всего сразу при каждом изменении.
+     */
+    this.configService.for(this.id).next(
+      Object.assign({}, this.properties, {[prop]: value})
+    );
   }
 
   private updateByConfigChanging (configId) {
@@ -35,11 +43,14 @@ export class ControlPropertiesEditor {
   }
 
   private setProps (config) {
-    this.properties = Object.entries(config)
+    const oldProps = this.properties;
+    const newProps = Object.entries(config)
       .sort((a, b) => (a[0] > b[0]) ? 1 : (a[0] < b[0]) ? -1 : 0)
       .reduce((acc, curr) => {
         acc[curr[0]] = curr[1];
         return acc;
       }, {});
+
+    this.properties = newProps;
   }
 }
