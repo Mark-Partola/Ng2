@@ -51,7 +51,11 @@ export class AppComponent implements AfterViewInit {
           width: '200px',
           height: '100px'
         },
-        title: 'Новое название'
+        title: 'Новое название',
+        width: 100,
+        height: 200,
+        top: 10,
+        left: 20
       });
     }, 5000);
   }
@@ -63,7 +67,7 @@ export class AppComponent implements AfterViewInit {
         width: '50px',
         height: '20px'
       },
-      title: 'Кнопка'
+      title: type
     });
   }
 

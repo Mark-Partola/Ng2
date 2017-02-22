@@ -14,7 +14,7 @@ export class ControlPropertiesEditor {
   public set target (config) {
     if (typeof config === 'object') {
       this.id = config.id;
-      this.properties = config.properties;
+      this.setProps(config.properties);
 
       this.updateByConfigChanging(this.id);
     }
@@ -30,7 +30,16 @@ export class ControlPropertiesEditor {
 
   private updateByConfigChanging (configId) {
     this.configService.for(configId).subscribe(newConfig => {
-      this.properties = newConfig.properties;
+      this.setProps(newConfig);
     });
+  }
+
+  private setProps (config) {
+    this.properties = Object.entries(config)
+      .sort((a, b) => (a[0] > b[0]) ? 1 : (b < a) ? -1 : 0)
+      .reduce((acc, curr) => {
+        acc[curr[0]] = curr[1];
+        return acc;
+      }, {});
   }
 }
