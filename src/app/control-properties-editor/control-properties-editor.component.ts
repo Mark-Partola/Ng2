@@ -36,7 +36,7 @@ export class ControlPropertiesEditor {
 
   private setProps (config) {
     this.properties = Object.entries(config)
-      .sort((a, b) => (a[0] > b[0]) ? 1 : (b < a) ? -1 : 0)
+      .sort((a, b) => (a[0] > b[0]) ? 1 : (a[0] < b[0]) ? -1 : 0)
       .reduce((acc, curr) => {
         acc[curr[0]] = curr[1];
         return acc;
