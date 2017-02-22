@@ -12,6 +12,8 @@ import { ControlPropertiesEditor } from './control-properties-editor/control-pro
 import { ContainerComponent } from './container/container.component';
 import { ContainerService } from './container/container.service';
 
+import { ForKeysPipe } from './common/ForKeysPipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { ContainerService } from './container/container.service';
     BlockPanel,
     ContainerComponent,
     ControlPanelBlock,
-    ControlPropertiesEditor
+    ControlPropertiesEditor,
+    ForKeysPipe
   ],
   imports: [
     BrowserModule,

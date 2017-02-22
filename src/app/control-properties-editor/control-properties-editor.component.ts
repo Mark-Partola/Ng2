@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {ContainerService} from "../container/container.service";
 
 @Component({
   selector: 'control-properties-editor',
@@ -7,12 +8,21 @@ import {Component, Input} from '@angular/core';
 })
 export class ControlPropertiesEditor {
 
+  constructor (private configService: ContainerService) {}
+
   @Input()
   public set target (config) {
     if (typeof config === 'object') {
-      this.properties = Object.entries(config.properties);
+      this.id = config.id;
+      this.properties = config.properties;
     }
   };
 
-  public properties = [];
+  public id: string | number;
+  public properties = {};
+
+  public onPropertyChange (prop, value) {
+    this.properties[prop] = value;
+    this.configService.for(this.id).next(this.properties);
+  }
 }

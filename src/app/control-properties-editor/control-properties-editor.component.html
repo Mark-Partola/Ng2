@@ -1,6 +1,10 @@
 <div class="panel-properties">
-  <div class="panel-properties__row" *ngFor="let prop of properties">
-    <label attr.for="{{ prop[0] }}" class="panel-properties__cell">{{ prop[0] }}:</label>
-    <input id="{{ prop[0] }}" class="panel-properties__cell" value="{{ prop[1] }}">
+  <div class="panel-properties__row" *ngFor="let prop of properties | keyValue">
+    <label attr.for="{{ prop.key }}" class="panel-properties__cell">{{ prop.key }}:</label>
+    <input id="{{ prop.key }}"
+           class="panel-properties__cell"
+           value="{{ prop.value }}"
+           [(ngModel)]="prop.value"
+           (ngModelChange)="onPropertyChange(prop.key, prop.value)">
   </div>
 </div>
